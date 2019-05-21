@@ -48,10 +48,10 @@
 		</p>
 	</div>
 	<div class='links'>
-		<a class='link' href='/'>lauragerte.com</a>
-		<a class='link' href='/'>nicholaschristowits.com</a>
-		<a class='link' href='/'>iloveyou-magazine.com</a>
-		<a class='link' href='/'>beige.de</a>
+		<a class='link' target='_blank' rel='noopener noreferrer' href='https://lauragerte.com'>lauragerte.com</a>
+		<a class='link' target='_blank' rel='noopener noreferrer' href='https://nicholaschristowitz.com'>nicholaschristowitz.com</a>
+		<a class='link' target='_blank' rel='noopener noreferrer' href='https://iloveyou-magazine.com'>iloveyou-magazine.com</a>
+		<a class='link' target='_blank' rel='noopener noreferrer' href='https://beige.de'>beige.de</a>
 	</div>
 	<div class='spacer'></div>
 </div>
