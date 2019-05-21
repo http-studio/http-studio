@@ -8,30 +8,36 @@
 
 	let cursor;
 
+	const updateCoordinates = event => {
+		clientX = event.clientX;
+		clientY = event.clientY;
+	};
+
+	const updateOffset = throttle(() => {
+		offset = window.innerWidth < 768 ? 15 : 30;
+	}, 30);
+
+	let requestId;
+
+	const render = () => {
+		cursor.style.transform = `translate(${clientX - offset}px, ${clientY - offset}px)`;
+		requestId = requestAnimationFrame(render);
+	};
+
 	onMount(() => {
-		const hover = window.matchMedia('(hover: hover)').matches;
-
-		if (hover) {
-			document.addEventListener('mousemove', event => {
-				clientX = event.clientX;
-				clientY = event.clientY;
-			});
-
-			const render = () => {
-				cursor.style.transform = `translate(${clientX - offset}px, ${clientY - offset}px)`;
-				requestAnimationFrame(render);
-			};
-
-			requestAnimationFrame(render);
-
-			const updateOffset = () => {
-				// TODO: compare with window.innerWidth
-				offset = offset = window.matchMedia('(min-width: 768px)').matches ? 30 : 15;
-			};
+		if (window.matchMedia('(hover: hover)').matches) {
+			document.addEventListener('mousemove', updateCoordinates);
+			window.addEventListener('resize', updateOffset);
 
 			updateOffset();
 
-			window.addEventListener('resize', throttle(updateOffset, 30));
+			requestId = requestAnimationFrame(render);
+
+			return () => {
+				document.removeEventListener('mousemove', updateCoordinates);
+				window.removeEventListener('resize', updateOffset);
+				cancelAnimationFrame(requestId);
+			};
 		}
 	});
 </script>
