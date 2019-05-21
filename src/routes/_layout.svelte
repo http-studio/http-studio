@@ -30,8 +30,8 @@
 </style>
 
 <nav class='nav nav-top'>
-	<a href='/'>Http</a>
-	<a href='/'>Studio</a>
+	<a rel='prefetch' href='/'>Http</a>
+	<a rel='prefetch' href='/'>Studio</a>
 </nav>
 
 <main class='main'>
