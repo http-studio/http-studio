@@ -9,7 +9,12 @@ const dev = NODE_ENV === 'development';
 polka()
 	.use(
 		compression({ threshold: 0 }),
-		sirv('static', { dev }),
+		sirv('static', {
+			dev,
+			// TODO: enable when going live
+			// maxAge: 31536000, // 1Y
+			// immutable: true
+		}),
 		sapper.middleware()
 	)
 	.listen(PORT, err => {
