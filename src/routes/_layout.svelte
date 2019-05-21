@@ -17,7 +17,7 @@
 		padding: 0 var(--spacing-M) var(--spacing-S);
 	}
 
-	main {
+	.main {
 		flex: 1;
 		overflow-y: scroll;
 		-webkit-overflow-scrolling: touch;
@@ -29,7 +29,7 @@
 	<a href='/'>Studio</a>
 </nav>
 
-<main>
+<main class='main'>
 	<slot></slot>
 </main>
 
