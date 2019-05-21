@@ -7,8 +7,9 @@
 </script>
 
 <script>
+	import { roles, projectImage } from '../store.js';
 	import Link from '../components/Link.svelte';
-	import { roles } from '../store.js';
+	import ProjectImage from '../components/ProjectImage.svelte';
 
 	export let links = [];
 </script>
@@ -64,3 +65,7 @@
 
 	<div class='spacer'></div>
 </div>
+
+{#if $projectImage}
+	<ProjectImage src={$projectImage}/>
+{/if}

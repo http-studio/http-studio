@@ -1,14 +1,24 @@
 <script>
-	import { roles, resetRoles } from '../store.js';
+	import {
+		roles,
+		resetRoles,
+		projectImage,
+		resetProjectImage
+	} from '../store.js';
 
 	export let href = '';
 	export let title = '';
+	export let image = '';
 
 	export let design = true;
 	export let development = true;
 
 	const setRoles = () => {
 		roles.set({ design, development });
+	};
+
+	const setProjectImage = () => {
+		projectImage.set(image);
 	};
 </script>
 
@@ -34,5 +44,7 @@
 	rel='noopener noreferrer'
 	{href}
 	on:mouseenter={setRoles}
+	on:mouseenter={setProjectImage}
 	on:mouseleave={resetRoles}
+	on:mouseleave={resetProjectImage}
 >{title}</a>
