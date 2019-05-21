@@ -7,7 +7,14 @@
 		display: flex;
 		flex-flow: row nowrap;
 		justify-content: space-between;
-		padding: var(--spacing-S) var(--spacing-M);
+	}
+
+	.nav-top {
+		padding: var(--spacing-S) var(--spacing-M) 0;
+	}
+
+	.nav-bottom {
+		padding: 0 var(--spacing-M) var(--spacing-S);
 	}
 
 	main {

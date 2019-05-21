@@ -6,6 +6,12 @@
 		padding: 0 var(--spacing-M);
 	}
 
+	.intro {
+		display: flex;
+		flex-flow: column;
+		justify-content: center;
+	}
+
 	.intro p {
 		text-align: center;
 	}
