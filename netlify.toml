@@ -1,0 +1,7 @@
+[Settings]
+ID = "http-studio"
+
+[build]
+  base = "/"
+  publish = "__sapper__/export/"
+  command = "yarn export"
