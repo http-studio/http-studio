@@ -1,4 +1,5 @@
 <script context='module'>
+	import '../../node_modules/ress/ress.css';
 	import '../style/base.css';
 </script>
 
