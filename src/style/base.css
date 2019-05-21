@@ -1,0 +1,17 @@
+@font-face {
+	font-family: Favorit;
+	font-style:  normal;
+	font-weight: normal;
+	src: url('/fonts/favorit-std-regular.woff') format('woff');
+}
+
+:root {
+	--black: #1C1C1A;
+	--purple: #651DFF;
+
+	--font: Favorit;
+}
+
+body {
+	font-family: var(--font);
+}
