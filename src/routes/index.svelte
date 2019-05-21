@@ -8,6 +8,7 @@
 
 <script>
 	import Link from '../components/Link.svelte';
+	import { roles } from '../store.js';
 
 	export let links = [];
 </script>
@@ -30,6 +31,10 @@
 		text-align: center;
 	}
 
+	.strikethrough {
+		text-decoration: line-through;
+	}
+
 	.links {
 		display: flex;
 		flex-flow: column nowrap;
@@ -45,7 +50,8 @@
 <div class='content'>
 	<div class='intro'>
 		<p>
-			Design and development<br>
+			<span class:strikethrough={!$roles.design}>Design</span> and
+			<span class:strikethrough={!$roles.development}>development</span><br>
 			for glowing rectangles
 		</p>
 	</div>

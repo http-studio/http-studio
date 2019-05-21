@@ -1,6 +1,15 @@
 <script>
+	import { roles, resetRoles } from '../store.js';
+
 	export let href = '';
 	export let title = '';
+
+	export let design = true;
+	export let development = true;
+
+	const setRoles = () => {
+		roles.set({ design, development });
+	};
 </script>
 
 <style>
@@ -19,4 +28,11 @@
 	}
 </style>
 
-<a class='link' target='_blank' rel='noopener noreferrer' {href}>{title}</a>
+<a
+	class='link'
+	target='_blank'
+	rel='noopener noreferrer'
+	{href}
+	on:mouseenter={setRoles}
+	on:mouseleave={resetRoles}
+>{title}</a>

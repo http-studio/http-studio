@@ -1,6 +1,6 @@
 export default [
-	{ title: 'lauragerte.com', href: 'https://lauragerte.com' },
-	{ title: 'nicholaschristowitz.com', href: 'https://nicholaschristowitz.com' },
-	{ title: 'iloveyou-magazine.com', href: 'https://iloveyou-magazine.com' },
-	{ title: 'beige.de', href: 'https://beige.de' }
+	{ title: 'lauragerte.com', href: 'https://lauragerte.com', design: true, development: true },
+	{ title: 'nicholaschristowitz.com', href: 'https://nicholaschristowitz.com', design: true, development: true },
+	{ title: 'iloveyou-magazine.com', href: 'https://iloveyou-magazine.com', design: false, development: true },
+	{ title: 'beige.de', href: 'https://beige.de', design: true, development: true }
 ];
