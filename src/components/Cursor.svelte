@@ -1,6 +1,6 @@
 <script>
 	import { onMount } from 'svelte';
-	import throttle from '../lib/throttle';
+	import throttle from 'just-throttle';
 
 	let clientX = -100;
 	let clientY = -100;

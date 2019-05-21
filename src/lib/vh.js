@@ -1,4 +1,4 @@
-import throttle from './throttle';
+import throttle from 'just-throttle';
 
 // Work around Mobile Safari viewport height problem
 // https://css-tricks.com/the-trick-to-viewport-units-on-mobile/
