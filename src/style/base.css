@@ -2,6 +2,7 @@
 	font-family: Favorit;
 	font-style:  normal;
 	font-weight: normal;
+	font-display: swap;
 	src: url('/fonts/favorit-std-regular.woff') format('woff');
 }
 
