@@ -1,8 +1,10 @@
 <script>
 	import { onMount } from 'svelte';
+	import throttle from '../lib/throttle';
 
 	let clientX = -100;
 	let clientY = -100;
+	let offset = 0;
 
 	let cursor;
 
@@ -16,11 +18,20 @@
 			});
 
 			const render = () => {
-				cursor.style.transform = `translate(${clientX}px, ${clientY}px)`;
+				cursor.style.transform = `translate(${clientX - offset}px, ${clientY - offset}px)`;
 				requestAnimationFrame(render);
 			};
 
 			requestAnimationFrame(render);
+
+			const updateOffset = () => {
+				// TODO: compare with window.innerWidth
+				offset = offset = window.matchMedia('(min-width: 768px)').matches ? 30 : 15;
+			};
+
+			updateOffset();
+
+			window.addEventListener('resize', throttle(updateOffset, 30));
 		}
 	});
 </script>
@@ -38,6 +49,7 @@
 		border-radius: var(--size);
 		background-color: var(--purple);
 		filter: blur(calc(var(--size) / 4));
+		pointer-events: none;
 	}
 
 	@media (min-width: 768px) {
