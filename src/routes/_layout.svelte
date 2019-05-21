@@ -28,6 +28,6 @@
 
 <nav class='nav nav-bottom'>
 	<a href='mailto:hello@http.studio'>e-mail</a>
-	<a href='https://www.instagram.com/http.studio/'>instagram</a>
-	<a href='https://www.are.na/http-studio'>are.na</a>
+	<a target='_blank' rel='noopener noreferrer' href='https://www.instagram.com/http.studio/'>instagram</a>
+	<a target='_blank' rel='noopener noreferrer' href='https://www.are.na/http-studio'>are.na</a>
 </nav>
