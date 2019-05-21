@@ -26,13 +26,15 @@
 	.link {
 		margin: 2px;
 		padding: calc(var(--spacing-S) / 5) calc(var(--spacing-S) / 2);
-		border: 1px solid;
+		border: 2px solid var(--purple);
 		border-radius: 999px;
 		color: var(--purple);
+		transition: color 0.4s var(--easing), background-color 0.4s var(--easing);
 	}
 
 	.link:hover {
-		color: var(--black);
+		color: var(--white);
+		background-color: var(--purple);
 	}
 </style>
 
