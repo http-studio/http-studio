@@ -2,6 +2,10 @@
 	import '../style/base.css';
 </script>
 
+<script>
+	import Cursor from '../components/Cursor.svelte';
+</script>
+
 <style>
 	.nav {
 		display: flex;
@@ -38,3 +42,5 @@
 	<a target='_blank' rel='noopener noreferrer' href='https://www.instagram.com/http.studio/'>instagram</a>
 	<a target='_blank' rel='noopener noreferrer' href='https://www.are.na/http-studio'>are.na</a>
 </nav>
+
+<Cursor/>
