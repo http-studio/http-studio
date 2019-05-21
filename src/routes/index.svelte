@@ -1,3 +1,17 @@
+<script context='module'>
+	export function preload({ params, query }) {
+		return this.fetch('links.json').then(r => r.json()).then(links => {
+			return { links };
+		});
+	}
+</script>
+
+<script>
+	import Link from '../components/Link.svelte';
+
+	export let links = [];
+</script>
+
 <style>
 	.content {
 		height: 100%;
@@ -22,20 +36,6 @@
 		justify-content: center;
 		align-items: center;
 	}
-
-	.link {
-		margin: 2px;
-		padding: calc(var(--spacing-S) / 5) calc(var(--spacing-S) / 2);
-		border: 2px solid var(--purple);
-		border-radius: 999px;
-		color: var(--purple);
-		transition: color 0.4s var(--easing), background-color 0.4s var(--easing);
-	}
-
-	.link:hover {
-		color: var(--white);
-		background-color: var(--purple);
-	}
 </style>
 
 <svelte:head>
@@ -49,11 +49,12 @@
 			for glowing rectangles
 		</p>
 	</div>
+
 	<div class='links'>
-		<a class='link' target='_blank' rel='noopener noreferrer' href='https://lauragerte.com'>lauragerte.com</a>
-		<a class='link' target='_blank' rel='noopener noreferrer' href='https://nicholaschristowitz.com'>nicholaschristowitz.com</a>
-		<a class='link' target='_blank' rel='noopener noreferrer' href='https://iloveyou-magazine.com'>iloveyou-magazine.com</a>
-		<a class='link' target='_blank' rel='noopener noreferrer' href='https://beige.de'>beige.de</a>
+		{#each links as link}
+			<Link {...link}/>
+		{/each}
 	</div>
+
 	<div class='spacer'></div>
 </div>
