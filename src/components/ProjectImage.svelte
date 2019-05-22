@@ -34,7 +34,6 @@
 		ctx.scale(dpr, dpr);
 
 		const image = new Image();
-		image.src = src;
 
 		image.onload = () => {
 			const { naturalWidth, naturalHeight } = image;
@@ -53,6 +52,8 @@
 
 			requestId = requestAnimationFrame(render);
 		};
+
+		image.src = src;
 
 		return () => {
 			document.removeEventListener('mousemove', updateCoordinates);
