@@ -37,6 +37,8 @@
 			document.documentElement.addEventListener('touchstart', event => {
 				bus.emit('setimage', images[index]);
 
+				index = (index + 1) % images.length;
+
 				document.documentElement.addEventListener('touchend', event => {
 					bus.emit('resetimage');
 				});
