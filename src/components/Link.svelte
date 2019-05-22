@@ -3,7 +3,9 @@
 
 	import {
 		roles,
-		resetRoles
+		resetRoles,
+		activeLink,
+		resetActiveLink
 	} from '../store.js';
 
 	import { bus } from '../lib/eventbus.js';
@@ -11,6 +13,7 @@
 	export let href = '';
 	export let title = '';
 	export let image = '';
+	export let i = 0;
 
 	export let design = true;
 	export let development = true;
@@ -46,6 +49,7 @@
 		transition: color 0.4s var(--easing), background-color 0.4s var(--easing);
 	}
 
+	.link.active,
 	.link:hover {
 		color: var(--white);
 		background-color: var(--purple);
@@ -54,6 +58,7 @@
 
 <a
 	class='link'
+	class:active={i === $activeLink}
 	target='_blank'
 	rel='noopener noreferrer'
 	{href}

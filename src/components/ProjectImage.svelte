@@ -2,8 +2,8 @@
 	import { onMount } from 'svelte';
 	import { bus } from '../lib/eventbus.js';
 
-	let clientX = -100;
-	let clientY = -100;
+	let clientX = -1000;
+	let clientY = -1000;
 
 	let canvas;
 
@@ -23,6 +23,7 @@
 		const isTouch = 'ontouchstart' in window;
 
 		if (isTouch) {
+			document.addEventListener('touchstart', updateTouchCoordinates);
 			document.addEventListener('touchmove', updateTouchCoordinates);
 		} else {
 			document.addEventListener('mousemove', updateCoordinates);
@@ -87,6 +88,7 @@
 <style>
 	.canvas {
 		position: fixed;
+		z-index: 1;
 		top: 0;
 		left: 0;
 		pointer-events: none;

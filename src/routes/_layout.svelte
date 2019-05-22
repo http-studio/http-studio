@@ -5,13 +5,16 @@
 
 <script>
 	import Cursor from '../components/Cursor.svelte';
+	import ProjectImage from '../components/ProjectImage.svelte';
 </script>
 
 <style>
 	.nav {
+		z-index: 2;
 		display: flex;
 		flex-flow: row nowrap;
 		justify-content: space-between;
+		user-select: none;
 	}
 
 	.nav-top {
@@ -24,6 +27,8 @@
 
 	.main {
 		flex: 1;
+		position: relative;
+		z-index: 2;
 		overflow-y: scroll;
 		-webkit-overflow-scrolling: touch;
 	}
@@ -44,4 +49,5 @@
 	<a target='_blank' rel='noopener noreferrer' href='https://www.are.na/http-studio'>are.na</a>
 </nav>
 
+<ProjectImage/>
 <Cursor/>

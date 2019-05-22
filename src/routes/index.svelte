@@ -9,9 +9,13 @@
 <script>
 	import { onMount } from 'svelte';
 	import { bus } from '../lib/eventbus.js';
-	import { roles, projectImage } from '../store.js';
+	import {
+		roles,
+		projectImage,
+		activeLink,
+		resetActiveLink
+	} from '../store.js';
 	import Link from '../components/Link.svelte';
-	import ProjectImage from '../components/ProjectImage.svelte';
 
 	export let links = [];
 
@@ -37,10 +41,13 @@
 			document.documentElement.addEventListener('touchstart', event => {
 				bus.emit('setimage', images[index]);
 
+				activeLink.set(index);
+
 				index = (index + 1) % images.length;
 
 				document.documentElement.addEventListener('touchend', event => {
 					bus.emit('resetimage');
+					resetActiveLink();
 				});
 			});
 		}
@@ -49,12 +56,11 @@
 
 <style>
 	.content {
-		position: relative;
-		z-index: 1;
 		height: 100%;
 		display: grid;
 		grid-template-rows: 1fr auto 1fr;
 		padding: 0 var(--spacing-M);
+		user-select: none;
 	}
 
 	.intro {
@@ -93,12 +99,10 @@
 	</div>
 
 	<div class='links'>
-		{#each links as link}
-			<Link {...link}/>
+		{#each links as link, i}
+			<Link {...link} {i}/>
 		{/each}
 	</div>
 
 	<div class='spacer'></div>
 </div>
-
-<ProjectImage src={$projectImage}/>
