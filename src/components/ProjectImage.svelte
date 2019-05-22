@@ -39,8 +39,18 @@
 		image.onload = () => {
 			const { naturalWidth, naturalHeight } = image;
 
-			const dWidth = 500;
-			const dHeight = 500 * naturalHeight / naturalWidth;
+			const bounds = 0.85 * Math.min(window.innerWidth, window.innerHeight);
+
+			let dWidth;
+			let dHeight;
+
+			if (naturalWidth > naturalHeight) {
+				dWidth = bounds;
+				dHeight = bounds * naturalHeight / naturalWidth;
+			} else {
+				dWidth = bounds * naturalWidth / naturalHeight;
+				dHeight = bounds;
+			}
 
 			const render = () => {
 				const dx = clientX - dWidth / 2;
