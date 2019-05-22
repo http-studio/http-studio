@@ -13,8 +13,8 @@
 	};
 
 	const updateTouchCoordinates = event => {
-		clientX = e.changedTouches[0].clientX;
-		clientY = e.changedTouches[0].clientY;
+		clientX = event.changedTouches[0].clientX;
+		clientY = event.changedTouches[0].clientY;
 	};
 
 	let requestId;
@@ -23,9 +23,9 @@
 		const isTouch = 'ontouchstart' in window;
 
 		if (isTouch) {
-			document.addEventListener('touchmove', updateCoordinates);
+			document.addEventListener('touchmove', updateTouchCoordinates);
 		} else {
-			document.addEventListener('mousemove', updateTouchCoordinates);
+			document.addEventListener('mousemove', updateCoordinates);
 		}
 
 		const width = window.innerWidth;
