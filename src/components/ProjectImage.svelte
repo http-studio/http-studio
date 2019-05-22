@@ -1,7 +1,6 @@
 <script>
 	import { onMount } from 'svelte';
-
-	export let src = '';
+	import { bus } from '../lib/eventbus.js';
 
 	let clientX = -100;
 	let clientY = -100;
@@ -34,9 +33,7 @@
 		ctx.scale(dpr, dpr);
 		ctx.imageSmoothingEnabled = false;
 
-		const image = new Image();
-
-		image.onload = () => {
+		bus.on('setimage', image => {
 			const { naturalWidth, naturalHeight } = image;
 
 			const bounds = 0.85 * Math.min(window.innerWidth, window.innerHeight);
@@ -62,9 +59,12 @@
 			};
 
 			requestId = requestAnimationFrame(render);
-		};
+		});
 
-		image.src = src;
+		bus.on('resetimage', () => {
+			ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+			cancelAnimationFrame(requestId);
+		});
 
 		return () => {
 			document.removeEventListener('mousemove', updateCoordinates);

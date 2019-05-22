@@ -1,10 +1,12 @@
 <script>
+	import { onMount } from 'svelte';
+
 	import {
 		roles,
-		resetRoles,
-		projectImage,
-		resetProjectImage
+		resetRoles
 	} from '../store.js';
+
+	import { bus } from '../lib/eventbus.js';
 
 	export let href = '';
 	export let title = '';
@@ -13,12 +15,23 @@
 	export let design = true;
 	export let development = true;
 
+	let img;
+
+	onMount(() => {
+		img = new Image();
+		img.src = image;
+	});
+
 	const setRoles = () => {
 		roles.set({ design, development });
 	};
 
-	const setProjectImage = () => {
-		projectImage.set(image);
+	const setImage = () => {
+		bus.emit('setimage', img);
+	};
+
+	const resetImage = () => {
+		bus.emit('resetimage');
 	};
 </script>
 
@@ -44,8 +57,8 @@
 	target='_blank'
 	rel='noopener noreferrer'
 	{href}
+	on:mouseenter={setImage}
+	on:mouseleave={resetImage}
 	on:mouseenter={setRoles}
-	on:mouseenter={setProjectImage}
 	on:mouseleave={resetRoles}
-	on:mouseleave={resetProjectImage}
 >{title}</a>

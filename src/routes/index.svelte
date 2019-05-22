@@ -75,6 +75,4 @@
 	<div class='spacer'></div>
 </div>
 
-{#if hover && $projectImage}
-	<ProjectImage src={$projectImage}/>
-{/if}
+<ProjectImage src={$projectImage}/>
