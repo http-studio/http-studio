@@ -12,10 +12,21 @@
 		clientY = event.clientY;
 	};
 
+	const updateTouchCoordinates = event => {
+		clientX = e.changedTouches[0].clientX;
+		clientY = e.changedTouches[0].clientY;
+	};
+
 	let requestId;
 
 	onMount(() => {
-		document.addEventListener('mousemove', updateCoordinates);
+		const isTouch = 'ontouchstart' in window;
+
+		if (isTouch) {
+			document.addEventListener('touchmove', updateCoordinates);
+		} else {
+			document.addEventListener('mousemove', updateTouchCoordinates);
+		}
 
 		const width = window.innerWidth;
 		const height = window.innerHeight;

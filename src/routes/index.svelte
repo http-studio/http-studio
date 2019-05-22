@@ -8,16 +8,40 @@
 
 <script>
 	import { onMount } from 'svelte';
+	import { bus } from '../lib/eventbus.js';
 	import { roles, projectImage } from '../store.js';
 	import Link from '../components/Link.svelte';
 	import ProjectImage from '../components/ProjectImage.svelte';
 
 	export let links = [];
 
+	let images;
+	let index = 0;
+
+	$: {
+		images = typeof window !== 'undefined'
+			? links.map(link => {
+				const image = new Image();
+				image.src = link.image;
+				return image;
+			})
+			: [null];
+	}
+
 	let hover = false;
 
 	onMount(() => {
 		hover = window.matchMedia('(hover: hover)').matches;
+
+		if (!hover) {
+			document.documentElement.addEventListener('touchstart', event => {
+				bus.emit('setimage', images[index]);
+
+				document.documentElement.addEventListener('touchend', event => {
+					bus.emit('resetimage');
+				});
+			});
+		}
 	});
 </script>
 
