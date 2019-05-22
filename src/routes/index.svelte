@@ -7,11 +7,18 @@
 </script>
 
 <script>
+	import { onMount } from 'svelte';
 	import { roles, projectImage } from '../store.js';
 	import Link from '../components/Link.svelte';
 	import ProjectImage from '../components/ProjectImage.svelte';
 
 	export let links = [];
+
+	let hover = false;
+
+	onMount(() => {
+		hover = window.matchMedia('(hover: hover)').matches;
+	});
 </script>
 
 <style>
@@ -68,6 +75,6 @@
 	<div class='spacer'></div>
 </div>
 
-{#if $projectImage}
+{#if hover && $projectImage}
 	<ProjectImage src={$projectImage}/>
 {/if}
