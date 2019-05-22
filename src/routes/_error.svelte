@@ -39,7 +39,7 @@
 </style>
 
 <svelte:head>
-	<title>{status}</title>
+	<title>{status} | Http Studio</title>
 </svelte:head>
 
 <div class='error'>
