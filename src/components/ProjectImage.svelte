@@ -32,6 +32,7 @@
 		const ctx = canvas.getContext('2d');
 
 		ctx.scale(dpr, dpr);
+		ctx.imageSmoothingEnabled = false;
 
 		const image = new Image();
 
