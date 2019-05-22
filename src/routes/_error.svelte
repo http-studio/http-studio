@@ -1,8 +1,25 @@
 <script>
+	import { onMount } from 'svelte';
+	import { bus } from '../lib/eventbus.js';
+
 	export let status;
 	export let error;
 
 	const dev = process.env.NODE_ENV === 'development';
+
+	onMount(() => {
+		const image = new Image();
+
+		image.onload = () => {
+			bus.emit('setimage', image);
+		};
+
+		image.src = '/error.png';
+
+		return () => {
+			bus.emit('resetimage');
+		};
+	});
 </script>
 
 <style>
@@ -17,7 +34,7 @@
 
 	.error h1,
 	.error p {
-		margin-bottom: 1em;
+		margin-bottom: calc(var(--spacing-S) / 2);
 	}
 </style>
 
