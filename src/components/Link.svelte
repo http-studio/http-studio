@@ -29,6 +29,7 @@
 		border: 2px solid var(--purple);
 		border-radius: 999px;
 		color: var(--purple);
+		background-color: var(--white);
 		transition: color 0.4s var(--easing), background-color 0.4s var(--easing);
 	}
 

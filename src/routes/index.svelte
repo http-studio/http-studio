@@ -16,6 +16,8 @@
 
 <style>
 	.content {
+		position: relative;
+		z-index: 1;
 		height: 100%;
 		display: grid;
 		grid-template-rows: 1fr auto 1fr;
