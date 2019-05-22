@@ -6,7 +6,10 @@
 	let clientX = -100;
 	let clientY = -100;
 
-	let container;
+	let canvas;
+
+	let width;
+	let height;
 
 	const updateCoordinates = event => {
 		clientX = event.clientX;
@@ -15,13 +18,20 @@
 
 	let requestId;
 
-	const render = () => {
-		container.style.transform = `translate(${clientX}px, ${clientY}px)`;
-		requestId = requestAnimationFrame(render);
-	};
-
 	onMount(() => {
 		document.addEventListener('mousemove', updateCoordinates);
+
+		const ctx = canvas.getContext('2d');
+
+		const image = new Image();
+		image.src = src;
+
+		const render = () => {
+			ctx.drawImage(image, clientX, clientY, 400, 312);
+
+			requestId = requestAnimationFrame(render);
+		};
+
 		requestId = requestAnimationFrame(render);
 
 		return () => {
@@ -32,22 +42,15 @@
 </script>
 
 <style>
-	.container {
+	.canvas {
 		position: fixed;
 		top: 0;
 		left: 0;
-		width: 300px;
-		height: 300px;
 		pointer-events: none;
-	}
-
-	.project-image {
-		width: 100%;
-		height: 100%;
-		object-fit: contain;
+		touch-action: none;
 	}
 </style>
 
-<div bind:this={container} class='container'>
-	<img class='project-image' {src} alt=''>
-</div>
+<svelte:window bind:innerWidth={width} bind:innerHeight={height}/>
+
+<canvas bind:this={canvas} class='canvas' {width} {height} style='width: {width}px; height: {height}px;'></canvas>
