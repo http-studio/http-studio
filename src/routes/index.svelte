@@ -16,8 +16,20 @@
 
 	let hover = false;
 
+	let absolute = 0;
+	let alpha = 0;
+	let beta = 0;
+	let gamma = 0;
+
 	onMount(() => {
 		hover = window.matchMedia('(hover: hover)').matches;
+
+		window.addEventListener('deviceorientation', event => {
+			absolute = event.absolute;
+			alpha = event.alpha;
+			beta = event.beta;
+			gamma = event.gamma;
+		});
 	});
 </script>
 
@@ -64,6 +76,7 @@
 			<span class:strikethrough={!$roles.development}>development</span><br>
 			for glowing rectangles
 		</p>
+		<p>absolute: {absolute}, alpha: {alpha}, beta: {beta}, gamma: {gamma}</p>
 	</div>
 
 	<div class='links'>
