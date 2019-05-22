@@ -16,9 +16,11 @@
 		if (path !== value.path) {
 			path = value.path;
 
-			setTimeout(() => {
-				window.ga('send', 'pageview');
-			}, 250);
+			if (typeof window !== 'undefined') {
+				setTimeout(() => {
+					window.ga('send', 'pageview');
+				}, 250);
+			}
 		}
 	});
 </script>
