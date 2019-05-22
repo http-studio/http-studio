@@ -4,8 +4,23 @@
 </script>
 
 <script>
+	import { stores } from '@sapper/app';
 	import Cursor from '../components/Cursor.svelte';
 	import ProjectImage from '../components/ProjectImage.svelte';
+
+	const { page } = stores();
+
+	let path;
+
+	page.subscribe(value => {
+		if (path !== value.path) {
+			path = value.path;
+
+			setTimeout(() => {
+				window.ga('send', 'pageview');
+			}, 250);
+		}
+	});
 </script>
 
 <style>
