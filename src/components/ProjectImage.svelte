@@ -39,8 +39,8 @@
 		image.onload = () => {
 			const { naturalWidth, naturalHeight } = image;
 
-			const dWidth = 400;
-			const dHeight = 400 * naturalHeight / naturalWidth;
+			const dWidth = 500;
+			const dHeight = 500 * naturalHeight / naturalWidth;
 
 			const render = () => {
 				const dx = clientX - dWidth / 2;
