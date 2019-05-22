@@ -8,9 +8,6 @@
 
 	let canvas;
 
-	let width;
-	let height;
-
 	const updateCoordinates = event => {
 		clientX = event.clientX;
 		clientY = event.clientY;
@@ -21,18 +18,35 @@
 	onMount(() => {
 		document.addEventListener('mousemove', updateCoordinates);
 
+		const width = window.innerWidth;
+		const height = window.innerHeight;
+
+		const dpr = window.devicePixelRatio || 1;
+
+		canvas.width = width * dpr;
+		canvas.height = height * dpr;
+
+		canvas.style.width = `${width}px`;
+		canvas.style.height = `${height}px`;
+
 		const ctx = canvas.getContext('2d');
+
+		ctx.scale(dpr, dpr);
 
 		const image = new Image();
 		image.src = src;
 
-		const render = () => {
-			ctx.drawImage(image, clientX, clientY, 400, 312);
+		image.onload = () => {
+			const { naturalWidth, naturalHeight } = image;
+
+			const render = () => {
+				ctx.drawImage(image, clientX, clientY, 400, 400 * naturalHeight / naturalWidth);
+
+				requestId = requestAnimationFrame(render);
+			};
 
 			requestId = requestAnimationFrame(render);
 		};
-
-		requestId = requestAnimationFrame(render);
 
 		return () => {
 			document.removeEventListener('mousemove', updateCoordinates);
@@ -51,6 +65,4 @@
 	}
 </style>
 
-<svelte:window bind:innerWidth={width} bind:innerHeight={height}/>
-
-<canvas bind:this={canvas} class='canvas' {width} {height} style='width: {width}px; height: {height}px;'></canvas>
+<canvas bind:this={canvas} class='canvas'></canvas>
