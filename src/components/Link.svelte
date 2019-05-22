@@ -40,13 +40,21 @@
 
 <style>
 	.link {
+		--border-width: 1px;
 		margin: 2px;
-		padding: calc(var(--spacing-S) / 5) calc(var(--spacing-S) / 2);
-		border: 2px solid var(--purple);
+		padding: calc(var(--spacing-S) / 5) calc(var(--spacing-S) / 1.5);
+		border: var(--border-width) solid var(--purple);
 		border-radius: 999px;
 		color: var(--purple);
 		background-color: var(--white);
 		transition: color 0.4s var(--easing), background-color 0.4s var(--easing);
+	}
+
+	@media (min-width: 768px) {
+		.link {
+			--border-width: 2px;
+			padding: calc(var(--spacing-S) / 5) calc(var(--spacing-S) / 2);
+		}
 	}
 
 	.link.active,

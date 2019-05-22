@@ -17,8 +17,8 @@
 
 	--easing: cubic-bezier(0.165, 0.84, 0.44, 1);
 
-	--spacing-S: 13px;
-	--spacing-M: 15px;
+	--spacing-S: 20px;
+	--spacing-M: 20px;
 }
 
 @media (min-width: 768px) {
@@ -27,7 +27,7 @@
 		--line-height: 43px;
 
 		--spacing-S: 40px;
-		--spacing-M: 50px;
+		--spacing-M: 40px;
 	}
 }
 
