@@ -39,8 +39,14 @@
 		image.onload = () => {
 			const { naturalWidth, naturalHeight } = image;
 
+			const dWidth = 400;
+			const dHeight = 400 * naturalHeight / naturalWidth;
+
 			const render = () => {
-				ctx.drawImage(image, clientX, clientY, 400, 400 * naturalHeight / naturalWidth);
+				const dx = clientX - dWidth / 2;
+				const dy = clientY - dHeight / 2;
+
+				ctx.drawImage(image, dx, dy, dWidth, dHeight);
 
 				requestId = requestAnimationFrame(render);
 			};
