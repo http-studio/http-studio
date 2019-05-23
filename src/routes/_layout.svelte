@@ -35,11 +35,11 @@
 	}
 
 	.nav-top {
-		padding: var(--spacing-S) var(--spacing-M) 0;
+		padding: var(--spacing) var(--spacing) 0;
 	}
 
 	.nav-bottom {
-		padding: 0 var(--spacing-M) var(--spacing-S);
+		padding: 0 var(--spacing) var(--spacing);
 	}
 
 	.main {

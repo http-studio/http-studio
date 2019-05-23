@@ -11,43 +11,47 @@
 	import { bus } from '../lib/eventbus.js';
 	import {
 		roles,
-		projectImage,
+		resetRoles,
 		activeLink,
 		resetActiveLink
-	} from '../store.js';
+	} from '../lib/store.js';
 	import Link from '../components/Link.svelte';
 
 	export let links = [];
 
-	let images;
+	let _links;
 	let index = 0;
 
 	$: {
-		images = typeof window !== 'undefined'
+		_links = typeof window !== 'undefined'
 			? links.map(link => {
 				const image = new Image();
-				image.src = link.image;
-				return image;
+				image.src = link.imageSrc;
+				return { ...link, image };
 			})
-			: [null];
+			: links
 	}
 
-	let hover = false;
-
 	onMount(() => {
-		hover = window.matchMedia('(hover: hover)').matches;
-
-		if (!hover) {
+		if (!window.matchMedia('(hover: hover)').matches) {
 			document.documentElement.addEventListener('touchstart', event => {
-				bus.emit('setimage', images[index]);
+				const link = _links[index];
 
-				activeLink.set(index);
+				if (link) {
+					bus.emit('setimage', link.image);
+					activeLink.set(index);
+					roles.set({
+						design: link.design,
+						development: link.development
+					});
+				}
 
-				index = (index + 1) % images.length;
+				index = (index + 1) % _links.length;
 
 				document.documentElement.addEventListener('touchend', event => {
 					bus.emit('resetimage');
 					resetActiveLink();
+					resetRoles();
 				});
 			});
 		}
@@ -59,7 +63,7 @@
 		height: 100%;
 		display: grid;
 		grid-template-rows: 1fr auto 1fr;
-		padding: 0 var(--spacing-M);
+		padding: 0 var(--spacing);
 		user-select: none;
 	}
 
@@ -99,7 +103,7 @@
 	</div>
 
 	<div class='links'>
-		{#each links as link, i}
+		{#each _links as link, i}
 			<Link {...link} {i}/>
 		{/each}
 	</div>

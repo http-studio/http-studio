@@ -11,12 +11,6 @@ export const resetRoles = () => {
 	roles.set(defaultRoles);
 };
 
-export const projectImage = writable(null);
-
-export const resetProjectImage = () => {
-	projectImage.set(null);
-};
-
 export const activeLink = writable(null);
 
 export const resetActiveLink = () => {

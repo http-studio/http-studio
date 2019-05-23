@@ -29,12 +29,12 @@
 		flex-flow: column nowrap;
 		justify-content: center;
 		align-items: center;
-		padding: var(--spacing-S) var(--spacing-M);
+		padding: var(--spacing) var(--spacing);
 	}
 
 	.error h1,
 	.error p {
-		margin-bottom: calc(var(--spacing-S) / 2);
+		margin-bottom: calc(var(--spacing) / 2);
 	}
 </style>
 

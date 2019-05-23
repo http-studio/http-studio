@@ -4,37 +4,27 @@
 	import {
 		roles,
 		resetRoles,
-		activeLink,
-		resetActiveLink
-	} from '../store.js';
+		activeLink
+	} from '../lib/store.js';
 
 	import { bus } from '../lib/eventbus.js';
 
 	export let href = '';
 	export let title = '';
-	export let image = '';
+	export let image = null;
+	export let imageSrc = '';
 	export let i = 0;
-
 	export let design = true;
 	export let development = true;
 
-	let img;
-
-	onMount(() => {
-		img = new Image();
-		img.src = image;
-	});
-
-	const setRoles = () => {
+	const setProject = () => {
+		bus.emit('setimage', image);
 		roles.set({ design, development });
 	};
 
-	const setImage = () => {
-		bus.emit('setimage', img);
-	};
-
-	const resetImage = () => {
+	const resetProject = () => {
 		bus.emit('resetimage');
+		resetRoles();
 	};
 </script>
 
@@ -42,7 +32,7 @@
 	.link {
 		--border-width: 1px;
 		margin: 2px;
-		padding: calc(var(--spacing-S) / 5) calc(var(--spacing-S) / 1.5);
+		padding: calc(var(--spacing) / 5) calc(var(--spacing) / 1.5);
 		border: var(--border-width) solid var(--purple);
 		border-radius: 999px;
 		color: var(--purple);
@@ -53,7 +43,7 @@
 	@media (min-width: 768px) {
 		.link {
 			--border-width: 2px;
-			padding: calc(var(--spacing-S) / 5) calc(var(--spacing-S) / 2);
+			padding: calc(var(--spacing) / 5) calc(var(--spacing) / 2);
 		}
 	}
 
@@ -70,8 +60,6 @@
 	target='_blank'
 	rel='noopener noreferrer'
 	{href}
-	on:mouseenter={setImage}
-	on:mouseleave={resetImage}
-	on:mouseenter={setRoles}
-	on:mouseleave={resetRoles}
+	on:mouseenter={setProject}
+	on:mouseleave={resetProject}
 >{title}</a>

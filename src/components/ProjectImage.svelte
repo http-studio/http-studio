@@ -1,5 +1,6 @@
 <script>
 	import { onMount } from 'svelte';
+	import throttle from 'just-throttle';
 	import { bus } from '../lib/eventbus.js';
 
 	let clientX = -1000;
@@ -17,18 +18,7 @@
 		clientY = event.changedTouches[0].clientY;
 	};
 
-	let requestId;
-
-	onMount(() => {
-		const isTouch = 'ontouchstart' in window;
-
-		if (isTouch) {
-			document.addEventListener('touchstart', updateTouchCoordinates);
-			document.addEventListener('touchmove', updateTouchCoordinates);
-		} else {
-			document.addEventListener('mousemove', updateCoordinates);
-		}
-
+	const scaleCanvas = throttle(() => {
 		const width = window.innerWidth;
 		const height = window.innerHeight;
 
@@ -44,33 +34,53 @@
 
 		ctx.scale(dpr, dpr);
 		ctx.imageSmoothingEnabled = false;
+	}, 30);
+
+	onMount(() => {
+		const isTouch = 'ontouchstart' in window;
+
+		if (isTouch) {
+			document.addEventListener('touchstart', updateTouchCoordinates);
+			document.addEventListener('touchmove', updateTouchCoordinates);
+		} else {
+			document.addEventListener('mousemove', updateCoordinates);
+		}
+
+		window.addEventListener('resize', scaleCanvas);
+
+		scaleCanvas();
+
+		let requestId;
+		const ctx = canvas.getContext('2d');
 
 		bus.on('setimage', image => {
-			const { naturalWidth, naturalHeight } = image;
+			if (image instanceof Image) {
+				const { naturalWidth, naturalHeight } = image;
 
-			const bounds = 0.85 * Math.min(window.innerWidth, window.innerHeight);
+				const bounds = 0.85 * Math.min(window.innerWidth, window.innerHeight);
 
-			let dWidth;
-			let dHeight;
+				let dWidth;
+				let dHeight;
 
-			if (naturalWidth > naturalHeight) {
-				dWidth = bounds;
-				dHeight = bounds * naturalHeight / naturalWidth;
-			} else {
-				dWidth = bounds * naturalWidth / naturalHeight;
-				dHeight = bounds;
-			}
+				if (naturalWidth > naturalHeight) {
+					dWidth = bounds;
+					dHeight = bounds * naturalHeight / naturalWidth;
+				} else {
+					dWidth = bounds * naturalWidth / naturalHeight;
+					dHeight = bounds;
+				}
 
-			const render = () => {
-				const dx = clientX - dWidth / 2;
-				const dy = clientY - dHeight / 2;
+				const render = () => {
+					const dx = clientX - dWidth / 2;
+					const dy = clientY - dHeight / 2;
 
-				ctx.drawImage(image, dx, dy, dWidth, dHeight);
+					ctx.drawImage(image, dx, dy, dWidth, dHeight);
+
+					requestId = requestAnimationFrame(render);
+				};
 
 				requestId = requestAnimationFrame(render);
-			};
-
-			requestId = requestAnimationFrame(render);
+			}
 		});
 
 		bus.on('resetimage', () => {
