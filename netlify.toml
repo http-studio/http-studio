@@ -5,3 +5,8 @@ ID = "http-studio"
   base = "/"
   publish = "__sapper__/export/"
   command = "yarn export"
+
+[[redirects]]
+    from = "/*"
+    to = "/404/index.html"
+    status = 404

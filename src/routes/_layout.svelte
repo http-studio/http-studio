@@ -49,6 +49,10 @@
 		overflow-y: scroll;
 		-webkit-overflow-scrolling: touch;
 	}
+
+	.error-link {
+		display: none;
+	}
 </style>
 
 <nav class='nav nav-top'>
@@ -66,5 +70,6 @@
 	<a target='_blank' rel='noopener noreferrer' href='https://www.are.na/http-studio'>are.na</a>
 </nav>
 
+<div class='error-link'><a href='/404'>404</a></div>
 <ProjectImage/>
 <Cursor/>
