@@ -17,14 +17,24 @@
 	export let design = true;
 	export let development = true;
 
+	let hover = false;
+
+	onMount(() => {
+		hover = window.matchMedia('(hover: hover)').matches;
+	});
+
 	const setProject = () => {
-		bus.emit('setimage', image);
-		roles.set({ design, development });
+		if (hover) {
+			bus.emit('setimage', image);
+			roles.set({ design, development });
+		}
 	};
 
 	const resetProject = () => {
-		bus.emit('resetimage');
-		resetRoles();
+		if (hover) {
+			bus.emit('resetimage');
+			resetRoles();
+		}
 	};
 </script>
 

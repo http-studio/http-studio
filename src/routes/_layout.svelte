@@ -6,7 +6,7 @@
 <script>
 	import { stores } from '@sapper/app';
 	import Cursor from '../components/Cursor.svelte';
-	import ProjectImage from '../components/ProjectImage.svelte';
+	import Canvas from '../components/Canvas.svelte';
 
 	const { page } = stores();
 
@@ -71,5 +71,5 @@
 </nav>
 
 <div class='error-link'><a href='/404'>404</a></div>
-<ProjectImage/>
+<Canvas/>
 <Cursor/>
