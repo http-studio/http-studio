@@ -7,8 +7,9 @@
 		flex-flow: column nowrap;
 		justify-content: center;
 		align-items: center;
-		padding: var(--spacing) var(--spacing);
+		padding: var(--spacing) var(--spacing) calc(var(--spacing) + 1em);
 		text-align: center;
+		hyphens: auto;
 	}
 
 	@media (min-width: 768px) {
