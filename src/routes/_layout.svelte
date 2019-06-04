@@ -59,7 +59,7 @@
 
 <nav class='nav nav-top'>
 	<Link href='/'>Http</Link>
-	<Link href='/'>Studio</Link>
+	<Link href='/info'>Studio</Link>
 </nav>
 
 <main class='main'>
