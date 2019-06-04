@@ -1,75 +1,37 @@
 <script>
-	import { onMount } from 'svelte';
+	import { stores } from '@sapper/app';
+	import { focusCursor, unfocusCursor } from '../lib/store.js';
 
-	import {
-		roles,
-		resetRoles,
-		activeLink
-	} from '../lib/store.js';
+	const { page } = stores();
 
-	import { bus } from '../lib/eventbus.js';
+	export let href;
 
-	export let href = '';
-	export let title = '';
-	export let image = null;
-	export let imageSrc = '';
-	export let i = 0;
-	export let design = true;
-	export let development = true;
+	let external;
+	let target;
+	let rel;
 
-	let hover = false;
-
-	onMount(() => {
-		hover = window.matchMedia('(hover: hover)').matches;
-	});
-
-	const setProject = () => {
-		if (hover) {
-			bus.emit('setimage', image);
-			roles.set({ design, development });
-		}
-	};
-
-	const resetProject = () => {
-		if (hover) {
-			bus.emit('resetimage');
-			resetRoles();
-		}
-	};
+	$: {
+		external = /(^https?:\/\/)|(^mailto:)/.test(href);
+		target = external ? '_blank' : '_self';
+		rel = external ? 'noopener' : 'prefetch';
+	}
 </script>
 
 <style>
-	.link {
-		--border-width: 1px;
-		margin: 2px;
-		padding: calc(var(--spacing) / 5) calc(var(--spacing) / 1.5);
-		border: var(--border-width) solid var(--purple);
-		border-radius: 999px;
-		color: var(--purple);
-		background-color: var(--white);
-		transition: color 0.4s var(--easing), background-color 0.4s var(--easing);
+	.strikethrough {
+		text-decoration: line-through;
 	}
 
-	@media (min-width: 768px) {
-		.link {
-			--border-width: 2px;
-			padding: calc(var(--spacing) / 5) calc(var(--spacing) / 2);
-		}
-	}
-
-	.link.active,
-	.link:hover {
-		color: var(--white);
-		background-color: var(--purple);
+	.strikethrough:hover {
+		text-decoration: none;
 	}
 </style>
 
 <a
-	class='link'
-	class:active={i === $activeLink}
-	target='_blank'
-	rel='noopener noreferrer'
+	{target}
+	{rel}
 	{href}
-	on:mouseenter={setProject}
-	on:mouseleave={resetProject}
->{title}</a>
+	on:mouseenter={focusCursor}
+	on:mouseleave={unfocusCursor}
+	class:strikethrough={$page.path !== '/' && $page.path === href}
+><slot></slot></a>

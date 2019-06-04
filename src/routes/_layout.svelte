@@ -5,6 +5,8 @@
 
 <script>
 	import { stores } from '@sapper/app';
+	import { focusCursor, unfocusCursor } from '../lib/store.js';
+	import Link from '../components/Link.svelte';
 	import Cursor from '../components/Cursor.svelte';
 	import Canvas from '../components/Canvas.svelte';
 
@@ -56,8 +58,8 @@
 </style>
 
 <nav class='nav nav-top'>
-	<a rel='prefetch' href='/'>Http</a>
-	<a rel='prefetch' href='/'>Studio</a>
+	<Link href='/'>Http</Link>
+	<Link href='/'>Studio</Link>
 </nav>
 
 <main class='main'>
@@ -65,9 +67,9 @@
 </main>
 
 <nav class='nav nav-bottom'>
-	<a href='mailto:hello@http.studio'>e-mail</a>
-	<a target='_blank' rel='noopener noreferrer' href='https://www.instagram.com/http.studio/'>instagram</a>
-	<a target='_blank' rel='noopener noreferrer' href='https://www.are.na/http-studio'>are.na</a>
+	<Link href='mailto:hello@http.studio'>e-mail</Link>
+	<Link href='https://www.instagram.com/http.studio/'>instagram</Link>
+	<Link href='https://www.are.na/http-studio'>are.na</Link>
 </nav>
 
 <div class='error-link'><a href='/404'>404</a></div>

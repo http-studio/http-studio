@@ -15,7 +15,7 @@
 		activeLink,
 		resetActiveLink
 	} from '../lib/store.js';
-	import Link from '../components/Link.svelte';
+	import ProjectLink from '../components/ProjectLink.svelte';
 
 	export let links = [];
 
@@ -104,7 +104,7 @@
 
 	<div class='links'>
 		{#each _links as link, i}
-			<Link {...link} {i}/>
+			<ProjectLink {...link} {i}/>
 		{/each}
 	</div>
 

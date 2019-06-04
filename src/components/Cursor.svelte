@@ -1,12 +1,31 @@
 <script>
 	import { onMount } from 'svelte';
+	import { tweened } from 'svelte/motion';
+	import { cubicOut } from 'svelte/easing';
 	import throttle from 'just-throttle';
+	import { cursorFocused } from '../lib/store';
+
+	let cursor;
 
 	let clientX = -100;
 	let clientY = -100;
-	let offset = 0;
+	let offset = 30;
+	let focused = false;
+	let scale = 1;
 
-	let cursor;
+	const _scale = tweened(1, {
+		duration: 300,
+		easing: cubicOut
+	});
+
+	_scale.subscribe(value => {
+		scale = value;
+	});
+
+	cursorFocused.subscribe(_focused => {
+		_scale.set(_focused ? 0.5 : 1);
+		focused = _focused;
+	});
 
 	const updateCoordinates = event => {
 		clientX = event.clientX;
@@ -14,13 +33,13 @@
 	};
 
 	const updateOffset = throttle(() => {
-		offset = window.innerWidth < 768 ? 15 : 30;
+		offset = (window.innerWidth < 768 ? 30 : 60) * 0.5;
 	}, 30);
 
 	let requestId;
 
 	const render = () => {
-		cursor.style.transform = `translate(${clientX - offset}px, ${clientY - offset}px)`;
+		cursor.style.transform = `translate(${clientX - offset}px, ${clientY - offset}px) scale(${scale})`;
 		requestId = requestAnimationFrame(render);
 	};
 
@@ -57,6 +76,12 @@
 		background-color: var(--purple);
 		filter: blur(calc(var(--size) / 4));
 		pointer-events: none;
+		transform-origin: center;
+		transition: filter 0.3s var(--easing);
+	}
+
+	.focused {
+		filter: none;
 	}
 
 	@media (min-width: 768px) {
@@ -80,4 +105,4 @@
 	}
 </style>
 
-<div bind:this={cursor} class='cursor'></div>
+<div bind:this={cursor} class='cursor' class:focused></div>
