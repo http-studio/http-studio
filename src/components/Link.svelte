@@ -12,7 +12,7 @@
 
 	$: {
 		external = /(^https?:\/\/)|(^mailto:)/.test(href);
-		target = external ? '_blank' : '_self';
+		target = external ? '_blank' : '';
 		rel = external ? 'noopener' : 'prefetch';
 	}
 </script>
