@@ -32,28 +32,36 @@
 			: links
 	}
 
+	const startDrawing = event => {
+		const link = _links[index];
+
+		if (link) {
+			bus.emit('setimage', link.image);
+			activeLink.set(index);
+			roles.set({
+				design: link.design,
+				development: link.development
+			});
+		}
+
+		index = (index + 1) % _links.length;
+	};
+
+	const stopDrawing = event => {
+		bus.emit('resetimage');
+		resetActiveLink();
+		resetRoles();
+	};
+
 	onMount(() => {
 		if (!window.matchMedia('(hover: hover)').matches) {
-			document.documentElement.addEventListener('touchstart', event => {
-				const link = _links[index];
+			document.documentElement.addEventListener('touchstart', startDrawing);
+			document.documentElement.addEventListener('touchend', stopDrawing);
 
-				if (link) {
-					bus.emit('setimage', link.image);
-					activeLink.set(index);
-					roles.set({
-						design: link.design,
-						development: link.development
-					});
-				}
-
-				index = (index + 1) % _links.length;
-
-				document.documentElement.addEventListener('touchend', event => {
-					bus.emit('resetimage');
-					resetActiveLink();
-					resetRoles();
-				});
-			});
+			return () => {
+				document.documentElement.removeEventListenr('touchstart', startDrawing);
+				document.documentElement.removeEventListenr('touchend', stopDrawing);
+			}
 		}
 	});
 </script>
