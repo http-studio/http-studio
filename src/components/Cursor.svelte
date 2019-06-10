@@ -14,7 +14,7 @@
 	let scale = 1;
 
 	const _scale = tweened(1, {
-		duration: 300,
+		duration: 200,
 		easing: cubicOut
 	});
 
@@ -77,7 +77,7 @@
 		filter: blur(calc(var(--size) / 4));
 		pointer-events: none;
 		transform-origin: center;
-		transition: filter 0.3s var(--easing);
+		transition: filter 0.2s var(--easing);
 	}
 
 	.focused {
