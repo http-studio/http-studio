@@ -58,7 +58,7 @@
 
 <div class='page'>
 	<p>
-		A design and development studio with a focus on identity, web, and technology projects.
-		Founded by <span on:mouseenter={startDrawing} on:mouseleave={stopDrawing}>Nicholas Christowitz and Nikolai Sivertsen</span>.
+		<span on:mouseenter={startDrawing} on:mouseleave={stopDrawing}>A design and development studio with a focus on identity, web, and technology projects.
+		Founded by Nicholas Christowitz and Nikolai Sivertsen.</span>
 	</p>
 </div>
