@@ -59,8 +59,8 @@
 			document.documentElement.addEventListener('touchend', stopDrawing);
 
 			return () => {
-				document.documentElement.removeEventListenr('touchstart', startDrawing);
-				document.documentElement.removeEventListenr('touchend', stopDrawing);
+				document.documentElement.removeEventListener('touchstart', startDrawing);
+				document.documentElement.removeEventListener('touchend', stopDrawing);
 			}
 		}
 	});
