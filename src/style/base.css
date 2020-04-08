@@ -12,12 +12,18 @@
 	--purple: #651DFF;
 
 	--font: Favorit, 'Helvetica Neue', Helvetica, Arial, sans-serif;
-	--font-size: 24px;
+	--font-size: 18px;
 	--line-height: 29px;
 
 	--easing: cubic-bezier(0.165, 0.84, 0.44, 1);
 
 	--spacing: 20px;
+}
+
+@mdia (min-width: 380px) {
+	:root {
+		--font-size: 24px;
+	}
 }
 
 @media (min-width: 768px) {
