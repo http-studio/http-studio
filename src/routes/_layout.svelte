@@ -56,6 +56,8 @@
 		padding: 120px 0;
 		position: relative;
 		z-index: 2;
+		overflow-y: scroll;
+		-webkit-overflow-scrolling: touch;
 	}
 
 	.error-link {
