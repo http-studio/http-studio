@@ -71,7 +71,6 @@
 		height: 100%;
 		display: grid;
 		grid-template-rows: 1fr auto 1fr;
-		row-gap: 60px;
 		padding: 0 var(--spacing);
 		user-select: none;
 	}
