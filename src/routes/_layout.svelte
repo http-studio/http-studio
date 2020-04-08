@@ -37,15 +37,23 @@
 	}
 
 	.nav-top {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
 		padding: var(--spacing) var(--spacing) 0;
 	}
 
 	.nav-bottom {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		right: 0;
 		padding: 0 var(--spacing) var(--spacing);
 	}
 
 	.main {
-		flex: 1;
+		padding: 120px 0;
 		position: relative;
 		z-index: 2;
 		overflow-y: scroll;

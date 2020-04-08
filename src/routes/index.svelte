@@ -71,6 +71,7 @@
 		height: 100%;
 		display: grid;
 		grid-template-rows: 1fr auto 1fr;
+		row-gap: 60px;
 		padding: 0 var(--spacing);
 		user-select: none;
 	}
@@ -91,9 +92,12 @@
 
 	.links {
 		display: flex;
-		flex-flow: column nowrap;
+		flex-flow: row wrap;
 		justify-content: center;
 		align-items: center;
+		width: 85vw;
+		max-width: 650px;
+		margin: 0 auto;
 	}
 </style>
 
